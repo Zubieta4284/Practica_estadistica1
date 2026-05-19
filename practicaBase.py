@@ -8,9 +8,9 @@ import re
 import datetime
 
 def main():
-    st.set_page_config(page_title="Base de datos Estudiantes",page_icon="🎇", layout="wide",initial_sidebar_state="collapsed")    
-    st.sidebar.title("Barra lateral") 
-    st.sidebar.header("base de datos Estudiantes")  
+    st.set_page_config(page_title="Ejemplo de estadistica II",page_icon="🎇", layout="wide",initial_sidebar_state="collapsed")    
+    #st.sidebar.title("Barra lateral") 
+    #st.sidebar.header("base de datos Estudiantes")  
     #carga el dataframe
     df_est=pd.read_csv("datos_estudiantes.csv")
     st.metric("Numero de registros",len(df_est))
