@@ -1,72 +1,83 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Git & GitHub: De Cero a Pro | UAP</title>
+    <title>Git & GitHub para Estadística y Python | UAP</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Fira+Code:wght@400;500&display=swap');
-        
-        body { font-family: 'Inter', sans-serif; }
-        code { font-family: 'Fira Code', monospace; }
-        .sidebar-item.active { @apply bg-blue-600 text-white shadow-lg transform scale-105; }
-        .step-circle.active { @apply bg-blue-600 border-blue-600 text-white; }
-        .animate-fade { animation: fadeIn 0.5s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Fira+Code:wght@400;500&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        code,
+        pre {
+            font-family: 'Fira Code', monospace;
+        }
+
+        .sidebar-item.active {
+            @apply bg-blue-600 text-white shadow-lg;
+        }
+
+        .code-card {
+            @apply bg-slate-900 rounded-xl p-5 relative border border-slate-700 my-4;
+        }
+
+        .copy-btn {
+            @apply absolute top-3 right-3 text-slate-500 hover:text-white transition-all p-2 bg-slate-800 rounded-md;
+        }
+
+        .instr-step {
+            @apply flex items-center gap-3 mb-6 font-bold text-slate-900 border-b pb-2;
+        }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased">
 
-    <!-- Barra de Progreso Superior -->
-    <div class="fixed top-0 left-0 w-full h-2 bg-slate-200 z-[100]">
-        <div id="progress-bar" class="h-full bg-blue-600 transition-all duration-700 w-0"></div>
-    </div>
+<body class="bg-slate-50 text-slate-800">
 
     <div class="flex flex-col lg:flex-row min-h-screen">
-        
-        <!-- SIDEBAR DE NAVEGACIÓN -->
-        <aside class="w-full lg:w-80 bg-slate-900 text-slate-300 p-8 lg:fixed lg:h-full z-50 shadow-2xl overflow-y-auto">
-            <div class="flex items-center gap-4 mb-12">
-                <div class="bg-blue-600 p-3 rounded-2xl shadow-inner">
-                    <i class="fa-solid fa-graduation-cap text-2xl text-white"></i>
+
+        <aside class="w-full lg:w-80 bg-slate-900 text-slate-300 p-8 lg:fixed lg:h-full z-50">
+            <div class="flex items-center gap-4 mb-10">
+                <div class="bg-blue-600 p-3 rounded-2xl shadow-lg">
+                    <i class="fa-brands fa-github text-2xl text-white"></i>
                 </div>
                 <div>
-                    <h1 class="text-xl font-extrabold text-white leading-none">Git Scholar</h1>
-                    <span class="text-[10px] text-blue-400 font-black uppercase tracking-tighter">Universidad Amazónica de Pando</span>
+                    <h1 class="text-xl font-black text-white">UAP Stats</h1>
+                    <span class="text-[10px] text-blue-400 font-bold tracking-widest">ESTADÍSTICA Y PYTHON</span>
                 </div>
             </div>
 
-            <nav class="space-y-2" id="nav-menu">
-                <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-4">Módulos de Aprendizaje</p>
-                <!-- Los items se generan por JS -->
+            <nav id="nav-menu" class="space-y-1">
             </nav>
 
-            <div class="mt-12 p-5 bg-slate-800/40 rounded-2xl border border-slate-700/50">
-                <div class="flex justify-between items-center mb-2">
-                    <span class="text-xs font-bold text-slate-400 text-blue-500">Tu Avance</span>
-                    <span id="percent-text" class="text-xs font-black text-blue-500">0%</span>
+            <div class="mt-10 p-5 bg-slate-800/50 rounded-xl border border-slate-700">
+                <p class="text-[10px] font-bold text-slate-500 uppercase mb-2">Estado del Curso</p>
+                <div class="flex justify-between text-xs mb-1">
+                    <span id="progress-text">0%</span>
                 </div>
-                <div class="w-full bg-slate-700 h-2 rounded-full">
-                    <div id="inner-progress" class="bg-blue-500 h-full w-0 transition-all duration-1000"></div>
+                <div class="w-full bg-slate-700 h-1 rounded-full">
+                    <div id="progress-bar" class="bg-blue-500 h-full w-0 transition-all duration-500"></div>
                 </div>
             </div>
         </aside>
 
-        <!-- CONTENIDO PRINCIPAL -->
-        <main class="flex-1 lg:ml-80 p-6 md:p-16 lg:p-24 max-w-6xl">
-            <div id="module-container" class="animate-fade">
-                <!-- El contenido del módulo se carga aquí -->
+        <main class="flex-1 lg:ml-80 p-6 md:p-16 lg:p-20 max-w-5xl mx-auto">
+            <div id="content-view" class="min-h-[60vh]">
             </div>
 
-            <!-- CONTROLES DE NAVEGACIÓN -->
-            <div class="mt-20 pt-10 border-t border-slate-200 flex flex-col sm:flex-row gap-4 justify-between items-center">
-                <button id="prevBtn" class="w-full sm:w-auto px-8 py-3 rounded-xl font-bold text-slate-500 hover:bg-slate-200 transition-all flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-arrow-left"></i> Anterior
+            <div class="mt-16 pt-8 border-t flex justify-between">
+                <button onclick="changeMod(-1)" id="prevBtn"
+                    class="text-slate-400 hover:text-blue-600 font-bold flex items-center gap-2">
+                    <i class="fa-solid fa-chevron-left"></i> Anterior
                 </button>
-                <button id="nextBtn" class="w-full sm:w-auto px-10 py-3 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 shadow-xl shadow-blue-200 transition-all flex items-center justify-center gap-2">
-                    Siguiente <i class="fa-solid fa-arrow-right"></i>
+                <button onclick="changeMod(1)" id="nextBtn"
+                    class="bg-blue-600 text-white px-8 py-3 rounded-xl font-bold shadow-lg hover:bg-blue-700">
+                    Siguiente <i class="fa-solid fa-chevron-right ml-2"></i>
                 </button>
             </div>
         </main>
@@ -75,184 +86,207 @@
     <script>
         const modules = [
             {
-                id: 'mod1',
-                title: 'Módulo 1: Preparación',
-                icon: 'fa-screwdriver-wrench',
+                title: "1. Identidad en Git y GitHub",
+                icon: "fa-user-gear",
                 content: `
-                    <h2 class="text-4xl font-black text-slate-900 mb-6">Preparación del Entorno</h2>
-                    <p class="text-lg text-slate-600 mb-10">Antes de escribir código, debemos preparar las herramientas. Git es el rastreador y GitHub es el servidor.</p>
+                    <h2 class="text-3xl font-black mb-6">Configura tu Firma y Acceso</h2>
+                    <p class="mb-4 text-slate-600">Como estudiante de estadística, tus scripts y análisis deben llevar tu autoría. Primero, configura tu identidad local en Git.</p>
                     
-                    <div class="space-y-8">
-                        <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
-                            <h3 class="text-xl font-bold mb-4 flex items-center gap-3"><i class="fa-solid fa-download text-blue-500"></i> 1.1 Instalación</h3>
-                            <p class="text-slate-600 mb-6 text-sm">Descarga Git de <a href="https://git-scm.com" class="text-blue-600 font-bold underline">git-scm.com</a>. Durante la instalación, presiona "Next" a todas las opciones predeterminadas.</p>
-                            <div class="bg-slate-900 p-5 rounded-2xl relative group">
-                                <code class="text-blue-400 text-sm">git --version</code>
-                                <button onclick="copy('git --version')" class="absolute right-4 top-4 text-slate-500 hover:text-white"><i class="fa-regular fa-copy"></i></button>
-                            </div>
-                        </div>
-
-                        <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 text-sm">
-                            <h3 class="text-xl font-bold mb-4 flex items-center gap-3 text-sm"><i class="fa-solid fa-user-pen text-purple-500 text-sm"></i> 1.2 Identidad</h3>
-                            <p class="text-slate-600 mb-6 text-sm">Configura tu firma digital. Esto aparecerá en cada cambio que realices.</p>
-                            <div class="bg-slate-900 p-5 rounded-2xl space-y-2">
-                                <code class="text-slate-300 block text-sm">git config --global user.email "tu@uap.edu.bo"</code>
-                                <code class="text-slate-300 block text-sm">git config --global user.name "Tu Nombre"</code>
-                            </div>
-                        </div>
+                    <div class="code-card">
+                        <code class="text-blue-400 text-sm" id="c1">git config --global user.name "Tu Nombre Real"<br>git config --global user.email "tu_correo@uap.edu.bo"</code>
+                        <button onclick="copy('c1')" class="copy-btn"><i class="fa-regular fa-copy"></i></button>
                     </div>
-                `
-            },
-            {
-                id: 'mod2',
-                title: 'Módulo 2: Repositorio Local',
-                icon: 'fa-folder-open',
-                content: `
-                    <h2 class="text-4xl font-black text-slate-900 mb-6">El Repositorio Local</h2>
-                    <p class="text-lg text-slate-600 mb-10">Aquí es donde Git empieza a vigilar tus archivos en tu propia computadora.</p>
                     
-                    <div class="bg-blue-600 text-white p-8 rounded-3xl mb-8 shadow-xl">
-                        <h3 class="text-xl font-bold mb-4 italic">El Filtro Maestro (.gitignore)</h3>
-                        <p class="mb-6 opacity-90">Es vital no subir archivos basura. Crea un archivo llamado <strong>.gitignore</strong> y escribe:</p>
-                        <pre class="bg-blue-900/50 p-4 rounded-xl font-mono text-sm">venv/\n__pycache__/\n*.csv (opcional)</pre>
+                    <h3 class="text-xl font-bold mt-8 mb-4">Autenticación en GitHub</h3>
+                    <p class="mb-4 text-slate-600 text-sm">Asegúrate de crear una cuenta en <a href="https://github.com" target="_blank" class="text-blue-600 font-bold hover:underline">github.com</a> con el mismo correo. Al subir código por primera vez, GitHub te pedirá iniciar sesión. Usa el <b>Git Credential Manager</b> (la ventana emergente) y autoriza con tu navegador.</p>
+                `
+            },
+            {
+                title: "2. Repositorio Estadístico",
+                icon: "fa-globe",
+                content: `
+                    <h2 class="text-3xl font-black mb-6">Tu Proyecto en la Nube</h2>
+                    <p class="mb-4 text-slate-600">El repositorio es donde vivirán tus datasets, notebooks y código Python. Para crearlo correctamente en GitHub:</p>
+                    <div class="space-y-4">
+                        <div class="bg-white p-5 rounded-xl border-l-4 border-blue-500 shadow-sm">
+                            <h4 class="font-bold mb-1">Paso 1: Iniciar Creación</h4>
+                            <p class="text-sm">En GitHub, haz clic en el botón verde <b>"New"</b> (Nuevo repositorio).</p>
+                        </div>
+                        <div class="bg-white p-5 rounded-xl border-l-4 border-indigo-500 shadow-sm">
+                            <h4 class="font-bold mb-1">Paso 2: Nomenclatura del Proyecto</h4>
+                            <p class="text-sm">Usa nombres descriptivos sin espacios ni acentos. Ej: <code>analisis-regresion-pando</code>, <code>dashboard-estadistico</code>, o <code>practica-anova</code>.</p>
+                        </div>
+                        <div class="bg-white p-5 rounded-xl border-l-4 border-purple-500 shadow-sm">
+                            <h4 class="font-bold mb-1">Paso 3: Configuración Vital</h4>
+                            <p class="text-sm">Déjalo en <b>Public</b>. <br><span class="text-red-500 font-bold">¡MUY IMPORTANTE!</span> <b>NO</b> marques "Add a README file" ni "Add .gitignore". Haremos esto desde tu computadora para evitar conflictos al vincular.</p>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "3. Filtro para Data Science",
+                icon: "fa-filter",
+                content: `
+                    <h2 class="text-3xl font-black mb-6">El Archivo .gitignore</h2>
+                    <p class="mb-4 text-slate-600">En proyectos de estadística con Python (Pandas, Streamlit, Jupyter), generamos archivos masivos y entornos virtuales que <b>NUNCA</b> deben subir a GitHub porque saturan el repositorio.</p>
+                    <p class="text-sm font-bold mb-2">Crea un archivo llamado <code>.gitignore</code> en tu carpeta local y pega esto:</p>
+                    <div class="code-card">
+                        <pre class="text-emerald-400 text-xs" id="c3"># Entornos virtuales de Python
+venv/
+env/
+.venv/
+
+# Jupyter Notebooks checkpoints
+.ipynb_checkpoints/
+
+# Datasets pesados (Evitar subir datos masivos)
+*.csv
+*.xlsx
+*.parquet
+
+# Archivos compilados y configuración local
+__pycache__/
+*.pyc
+.env</pre>
+                        <button onclick="copy('c3')" class="copy-btn"><i class="fa-regular fa-copy"></i></button>
+                    </div>
+                `
+            },
+            {
+                title: "4. Vinculación y Subida",
+                icon: "fa-cloud-arrow-up",
+                content: `
+                    <h2 class="text-3xl font-black mb-6">Primer Envío (Push)</h2>
+                    <p class="mb-4 text-slate-600">Abre la terminal en la carpeta de tu proyecto local y ejecuta en orden:</p>
+                    
+                    <h4 class="font-bold text-xs text-blue-600 uppercase mb-2">A. Inicializar y Guardar Localmente</h4>
+                    <div class="code-card">
+                        <code class="text-slate-300 text-xs" id="c4">git init<br>git add .<br>git commit -m "Estructura inicial del análisis estadístico"</code>
+                        <button onclick="copy('c4')" class="copy-btn"><i class="fa-regular fa-copy"></i></button>
                     </div>
 
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div class="bg-white p-6 rounded-2xl border border-slate-200">
-                            <span class="text-blue-600 font-black text-xs uppercase">Paso 2.1</span>
-                            <h4 class="font-bold text-lg mt-2 mb-2">Inicializar</h4>
-                            <code class="block bg-slate-100 p-3 rounded-lg text-xs">git init</code>
-                            <p class="text-xs text-slate-500 mt-2 italic">Esto crea una carpeta oculta .git donde se guarda la magia.</p>
-                        </div>
-                        <div class="bg-white p-6 rounded-2xl border border-slate-200">
-                            <span class="text-green-600 font-black text-xs uppercase">Paso 2.2</span>
-                            <h4 class="font-bold text-lg mt-2 mb-2">El Ciclo de Guardado</h4>
-                            <code class="block bg-slate-100 p-3 rounded-lg text-xs mb-2">git add .</code>
-                            <code class="block bg-slate-100 p-3 rounded-lg text-xs">git commit -m "Mi mensaje"</code>
-                        </div>
+                    <h4 class="font-bold text-xs text-blue-600 uppercase mt-6 mb-2">B. Conectar a GitHub y Subir</h4>
+                    <p class="text-xs text-slate-500 mb-2">Copia el enlace HTTPs de tu repositorio vacío en GitHub y reemplázalo aquí:</p>
+                    <div class="code-card">
+                        <code class="text-slate-300 text-xs" id="c5">git branch -M main<br>git remote add origin https://github.com/USUARIO/REPO.git<br>git push -u origin main</code>
+                        <button onclick="copy('c5')" class="copy-btn"><i class="fa-regular fa-copy"></i></button>
                     </div>
                 `
             },
             {
-                id: 'mod3',
-                title: 'Módulo 3: Conexión GitHub',
-                icon: 'fa-cloud-arrow-up',
+                title: "5. Ciclo de Trabajo",
+                icon: "fa-rotate",
                 content: `
-                    <h2 class="text-3xl font-bold mb-6">Subiendo a la Nube (GitHub)</h2>
-                    <div class="bg-white p-8 rounded-3xl border border-slate-200 mb-8">
-                        <p class="mb-6 font-medium">Una vez creado el repositorio en la web de GitHub, conecta tu PC con este comando:</p>
-                        <div class="bg-slate-900 p-6 rounded-2xl relative">
-                            <code class="text-blue-400 block break-all text-xs">git remote add origin https://github.com/Usuario/Proyecto.git</code>
-                            <button onclick="copy('git remote add origin')" class="absolute right-4 top-4 text-slate-500"><i class="fa-regular fa-copy"></i></button>
+                    <h2 class="text-3xl font-black mb-6">El Flujo del Estadístico</h2>
+                    <p class="mb-4 text-slate-600">A medida que avanzas en tu análisis de datos, limpias variables o creas nuevos gráficos, debes guardar tu progreso regularmente.</p>
+                    
+                    <div class="bg-slate-100 p-5 rounded-xl border border-slate-200">
+                        <h4 class="font-bold text-sm mb-3 text-slate-800">Cada vez que termines un avance importante:</h4>
+                        <div class="code-card mt-0 mb-3">
+                            <code class="text-slate-300 text-xs" id="c8">git add .<br>git commit -m "Se agregaron gráficos de dispersión y matriz de correlación"<br>git push</code>
+                            <button onclick="copy('c8')" class="copy-btn"><i class="fa-regular fa-copy"></i></button>
                         </div>
-                    </div>
-                    <div class="bg-green-50 p-6 rounded-2xl border border-green-100">
-                        <h4 class="text-green-800 font-bold mb-2 uppercase text-xs tracking-widest italic">El Gran Lanzamiento</h4>
-                        <code class="block bg-green-100 text-green-900 p-4 rounded-xl font-bold text-sm">git push -u origin main</code>
+                        <p class="text-xs text-slate-600"><b>Consejo:</b> Usa mensajes descriptivos en tus commits que indiquen qué modelo o cálculo estadístico aplicaste.</p>
                     </div>
                 `
             },
             {
-                id: 'mod4',
-                title: 'Módulo 4: Portabilidad',
-                icon: 'fa-laptop-code',
+                title: "6. Clonar y Portabilidad",
+                icon: "fa-laptop-code",
                 content: `
-                    <h2 class="text-3xl font-bold mb-6">Recuperación y Portabilidad</h2>
-                    <p class="mb-8">Llegaste a otra computadora. ¿Cómo recuperas todo?</p>
+                    <h2 class="text-3xl font-black mb-6">Trabajar en el Laboratorio</h2>
+                    <p class="mb-6 text-slate-600">Para continuar tu proyecto en otra computadora de la universidad, <b>NO uses pendrives</b>. Sigue el estándar:</p>
+                    
                     <div class="space-y-6">
-                        <div class="flex items-start gap-4">
-                            <div class="bg-slate-200 p-3 rounded-full font-bold">1</div>
-                            <div class="flex-1">
-                                <p class="font-bold mb-2">Bajar el proyecto</p>
-                                <code class="block bg-slate-900 text-slate-300 p-4 rounded-xl text-xs italic">git clone https://github.com/tu-link.git</code>
+                        <div>
+                            <span class="step-pill bg-blue-100 text-blue-700 px-2 py-1 rounded text-[10px] font-bold">PASO 1: DESCARGAR REPOSITORIO</span>
+                            <div class="code-card">
+                                <code class="text-blue-300 text-xs" id="c6">git clone https://github.com/USUARIO/REPO.git</code>
+                                <button onclick="copy('c6')" class="copy-btn"><i class="fa-regular fa-copy"></i></button>
                             </div>
                         </div>
-                        <div class="flex items-start gap-4">
-                            <div class="bg-slate-200 p-3 rounded-full font-bold">2</div>
-                            <div class="flex-1">
-                                <p class="font-bold mb-2">Reconstruir entorno virtual</p>
-                                <code class="block bg-slate-900 text-slate-300 p-4 rounded-xl text-xs italic">python -m venv venv\npip install -r requirements.txt</code>
+                        <div>
+                            <span class="step-pill bg-green-100 text-green-700 px-2 py-1 rounded text-[10px] font-bold">PASO 2: RECUPERAR LIBRERÍAS DE PYTHON</span>
+                            <p class="text-xs text-slate-500 mt-2">Como ignoraste el entorno virtual con el <code>.gitignore</code>, debes recrearlo e instalar las librerías necesarias (Pandas, Streamlit, etc).</p>
+                            <div class="code-card">
+                                <code class="text-blue-300 text-xs" id="c7">python -m venv venv<br>.\\venv\\Scripts\\activate<br>pip install -r requirements.txt</code>
+                                <button onclick="copy('c7')" class="copy-btn"><i class="fa-regular fa-copy"></i></button>
                             </div>
-                        </div>
-                    </div>
-                `
-            },
-            {
-                id: 'mod5',
-                title: 'Módulo 5: Troubleshooting',
-                icon: 'fa-bug-slash',
-                content: `
-                    <h2 class="text-3xl font-bold mb-6 text-red-600 italic">Troubleshooting: Solución de Errores</h2>
-                    <div class="grid gap-6">
-                        <div class="p-6 bg-red-50 rounded-2xl border border-red-100">
-                            <h4 class="font-bold text-red-900 mb-2 underline italic text-sm italic">Error: "src refspec main does not match any"</h4>
-                            <p class="text-sm text-red-800">No has hecho el primer <strong>commit</strong>. Git no puede subir algo que no ha guardado localmente todavía.</p>
-                        </div>
-                        <div class="p-6 bg-amber-50 rounded-2xl border border-amber-100">
-                            <h4 class="font-bold text-amber-900 mb-2 underline italic text-sm italic">Error: "remote origin already exists"</h4>
-                            <p class="text-sm text-amber-800">Ya habías conectado la carpeta. Borra la conexión anterior con: <code class="bg-white px-1">git remote remove origin</code>.</p>
                         </div>
                     </div>
                 `
             }
         ];
 
-        let currentMod = 0;
+        let currentIdx = 0;
 
         function updateUI() {
-            const container = document.getElementById('module-container');
-            const navMenu = document.getElementById('nav-menu');
-            
-            // Render Content
-            container.innerHTML = modules[currentMod].content;
-            
+            const menu = document.getElementById('nav-menu');
+            const view = document.getElementById('content-view');
+            const progress = ((currentIdx + 1) / modules.length) * 100;
+
             // Render Nav
-            navMenu.innerHTML = '<p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-4">Módulos de Aprendizaje</p>';
-            modules.forEach((mod, index) => {
-                const btn = document.createElement('button');
-                btn.className = `sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 text-sm font-medium mb-1 ${index === currentMod ? 'active' : 'hover:bg-slate-800 hover:text-white'}`;
-                btn.innerHTML = `<i class="fa-solid ${mod.icon} w-5"></i> ${mod.title}`;
-                btn.onclick = () => { currentMod = index; updateUI(); window.scrollTo({top:0, behavior:'smooth'}); };
-                navMenu.appendChild(btn);
+            menu.innerHTML = '';
+            modules.forEach((mod, i) => {
+                const b = document.createElement('button');
+                b.className = `sidebar-item w-full flex items-center gap-3 px-4 py-4 rounded-xl text-sm font-bold mb-1 transition-all ${i === currentIdx ? 'active' : 'hover:bg-slate-800 text-slate-400'}`;
+                b.innerHTML = `<i class="fa-solid ${mod.icon} w-5"></i> ${mod.title}`;
+                b.onclick = () => { currentIdx = i; updateUI(); };
+                menu.appendChild(b);
             });
 
+            // Render Content
+            view.innerHTML = `<div class="animate-fade">${modules[currentIdx].content}</div>`;
+
             // Progress
-            const progress = ((currentMod + 1) / modules.length) * 100;
             document.getElementById('progress-bar').style.width = progress + '%';
-            document.getElementById('inner-progress').style.width = progress + '%';
-            document.getElementById('percent-text').innerText = Math.round(progress) + '%';
+            document.getElementById('progress-text').innerText = Math.round(progress) + '%';
 
             // Buttons
-            document.getElementById('prevBtn').disabled = currentMod === 0;
-            document.getElementById('prevBtn').style.opacity = currentMod === 0 ? '0.3' : '1';
-            document.getElementById('nextBtn').innerHTML = currentMod === modules.length - 1 ? '¡Finalizar!' : 'Siguiente <i class="fa-solid fa-arrow-right ml-2"></i>';
+            document.getElementById('prevBtn').style.visibility = currentIdx === 0 ? 'hidden' : 'visible';
+            document.getElementById('nextBtn').innerText = currentStepText();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        document.getElementById('nextBtn').onclick = () => {
-            if (currentMod < modules.length - 1) {
-                currentMod++;
-                updateUI();
-                window.scrollTo({top:0, behavior:'smooth'});
-            } else {
-                alert("¡Felicidades Eduardo! Has terminado la guía profesional de Git.");
-            }
-        };
-
-        document.getElementById('prevBtn').onclick = () => {
-            if (currentMod > 0) {
-                currentMod--;
-                updateUI();
-                window.scrollTo({top:0, behavior:'smooth'});
-            }
-        };
-
-        function copy(text) {
-            navigator.clipboard.writeText(text);
-            alert("Comando copiado al portapapeles");
+        function currentStepText() {
+            return currentIdx === modules.length - 1 ? "¡Guía Completa!" : "Siguiente Paso";
         }
 
-        // Init
+        function changeMod(n) {
+            currentIdx += n;
+            if (currentIdx < 0) currentIdx = 0;
+            if (currentIdx >= modules.length) currentIdx = modules.length - 1;
+            updateUI();
+        }
+
+        async function copy(id) {
+            const code = document.getElementById(id).innerText;
+            await navigator.clipboard.writeText(code);
+            const btn = event.currentTarget;
+            btn.innerHTML = '<i class="fa-solid fa-check text-emerald-400"></i>';
+            setTimeout(() => { btn.innerHTML = '<i class="fa-regular fa-copy"></i>'; }, 2000);
+        }
+
         updateUI();
     </script>
+
+    <style>
+        .animate-fade {
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </body>
+
 </html>
