@@ -8,9 +8,12 @@ import re
 import datetime
 
 def main():
-    st.set_page_config(page_title="Ejemplo de estadistica II",page_icon="🎇", layout="wide",initial_sidebar_state="collapsed")    
-    #st.sidebar.title("Barra lateral") 
-    #st.sidebar.header("base de datos Estudiantes")  
+    # initial_sidebar_state es una funcion que permite ocultar la barra lateral
+    # collapsed es una funcion que permite ocultar la barra lateral
+    # expanded es una funcion que permite mostrar la barra lateral
+    st.set_page_config(page_title="Ejemplo de estadistica II",page_icon="👓", layout="wide",initial_sidebar_state="collapsed")    
+    st.sidebar.title("Barra lateral") 
+    st.sidebar.header("base de datos Estudiantes")  
     #carga el dataframe
     df_est=pd.read_csv("datos_estudiantes.csv")
     st.metric("Numero de registros",len(df_est))
@@ -47,7 +50,7 @@ def main():
         st.write(suma(valor1,valor2))
     #multiselect sirve para seleccionar varias opciones de una lista
     opcion2=st.multiselect("Selecciona tu color preferido", ["negro", "blanco", "verde", "azul", "rojo"])
-    st.write("Los colores seleccionados son : ",opcion2)
+    st.write(f"Los colores seleccionados son : {opcion2}")
     #slider sirve para seleccionar un valor de un rango
     valor3=st.slider("Selecciona un valor",
         min_value=0,
@@ -60,6 +63,22 @@ def main():
         options=["bajo","medio", "regula","alto"],
         value="regula")
     st.write(f"El clima de cobija tiene un valor {valor4}")
+    st.title("BOLA DE CRISTAL")
+    valor5=st.select_slider("Elija la esfera que mas te guste",
+        options=["esfera-cristal","esfera-sol", "esfera-cielo","esfera-mar"],
+        value="esfera-cristal")
+    st.title(f"La esfera elegida es {valor5}")
+    ima_clima={
+        "esfera-cristal":"image/bolacristal.png",
+        "esfera-sol":"image/bolacristal2.png",
+        "esfera-cielo":"image/bolacristal3.png",
+        "esfera-mar":"image/bolacristal4.png"
+    }
+    
+
+    st.image(ima_clima[valor5],caption=f"La esfera es de tipo: {valor5}",use_container_width=True)
+
+
     #Manejo de imagenes
     img=Image.open("ima1.png")
     st.image(img,use_container_width=True)
